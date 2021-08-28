@@ -9,6 +9,7 @@ const expressLayouts = require("express-ejs-layouts");
 
 const indexRouter = require("./routes/index"); // this will tell the location of our routes
 const authorsRouter = require("./routes/authors");
+const bodyParser = require("body-parser");
 
 // configuring our express application
 app.set("view engine", "ejs"); // we want to set the view engine as ejs
@@ -17,6 +18,7 @@ app.set("layout", "layouts/layout"); // we can tell how our layout files are goi
 // the idea behind the layour files is that every single file is going to be put inside of this layout file, so that we don't have to duplicate all the begining and ending html of the project such as header and footer
 app.use(expressLayouts); // tell node that we want to use the expressLayouts
 app.use(express.static("public")); // this will tell where our public files are going to be like, stylesheets, js files, images
+app.use(bodyParser.urlencoded({ limit: "10mb", extended: false })); //here urlencoded() is used because we are sending these values via url to our server. limit is to set the maximum size of the file that our server can accept.
 
 const mongoose = require("mongoose");
 

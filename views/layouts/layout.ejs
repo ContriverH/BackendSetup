@@ -10,9 +10,10 @@
 
     <body>
         <%- include('../partials/header.ejs') %>
-            <%- body %>
-                <!-- Here we want to put everything inside the body of every single page of our application -->
-                <!-- It will include the before and after in every single page and those files need to only write the body  part of the repository  -->
+            <%- include('../partials/errorMessage.ejs') %>
+                <%- body %>
+                    <!-- Here we want to put everything inside the body of every single page of our application -->
+                    <!-- It will include the before and after in every single page and those files need to only write the body  part of the repository  -->
     </body>
 
 </html>

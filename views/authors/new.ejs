@@ -2,6 +2,7 @@
 <form action="/authors" method="POST">
     <!-- action will be the url where the form goes to. You can send a POST request using only form.-->
 
-    <a href="/authors">Cancel</a>
-    <button type="submit">Create</button>
+    <%- include('_form_fields') %>
+        <a href="/authors">Cancel</a>
+        <button type="submit">Create</button>
 </form>
