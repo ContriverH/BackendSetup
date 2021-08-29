@@ -5,10 +5,16 @@ const Author = require("../models/author");
 // All authors route
 // since in the server.js using the command-> use("./authors"),  so we can directly start writing from / while specifing the route
 router.get("/", async (req, res) => {
-  res.render("authors/index"); // authors/index.ejs is the file location
+  let searchOptions = {}; // this is to store the search results.
+  if (req.query.name != null && req.query.name !== "") {
+    searchOptions.name = new RegExp(req.query.name, "i"); // here i means case-insensitive and RegExp is used to start serach with even the smallest matching part of the name string.
+  }
   try {
-    const authors = await Author.find({});
-    res.render("authors/index", { authors: authors });
+    const authors = await Author.find(searchOptions);
+    res.render("authors/index", {
+      authors: authors,
+      searchOptions: req.query, // this is to send back the request to the user so that you can repopulate the filds in the index page.
+    }); // authors/index.ejs is the file location
   } catch {
     res.redirect("/");
   }
