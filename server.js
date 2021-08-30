@@ -22,7 +22,7 @@ app.use(bodyParser.urlencoded({ limit: "10mb", extended: false })); //here urlen
 
 const mongoose = require("mongoose");
 
-mongoose.connect(process.env.DATBASE_URL); // DATABASE_URL is being provided by the environment variable when using server, but for local use we need to create a .env file and specify the variable over there otherwise it will through error. Now the DATABASE_URL is in .env file
+mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true }); // DATABASE_URL is being provided by the environment variable when using server, but for local use we need to create a .env file and specify the variable over there otherwise it will through error. Now the DATABASE_URL is in .env file
 
 const db = mongoose.connection;
 db.on("error", (error) => console.error(error)); // this is to check whether we are connected to our database
@@ -32,3 +32,4 @@ app.use("/", indexRouter);
 app.use("/authors", authorsRouter); // this will automatically append /authors before all the routes from the author
 
 app.listen(process.env.PORT || 3000); // this is going to pull the port from the enviornment variable, the server is going to tell what source it is listening to but for the development purposes we assign a port number by ourselves since the server is not telling anything, so we set the port to 3000
+// yTCAF334bng8wnHq;
