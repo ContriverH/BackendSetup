@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const path = require("path");
 
 const coverImageBasePath = "uploads/bookCovers";
 
@@ -32,6 +33,13 @@ const bookSchema = new mongoose.Schema({
     required: true,
     ref: "Author", // It is the name of the schema to which we are referring.
   },
+});
+
+bookSchema.virtual("coverImagePath").get(function () {
+  // virtual will all the property as all other fields in the model, but it is going to derive its value from those fields.
+  if (this.coverImage != null) {
+    return path.join("/", coverImageBasePath, this.coverImage);
+  }
 });
 
 module.exports = mongoose.model("Book", bookSchema);
