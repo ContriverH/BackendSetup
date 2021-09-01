@@ -9,6 +9,7 @@ const expressLayouts = require("express-ejs-layouts");
 
 const indexRouter = require("./routes/index"); // this will tell the location of our routes
 const authorsRouter = require("./routes/authors");
+const booksRouter = require("./routes/books");
 const bodyParser = require("body-parser");
 
 // configuring our express application
@@ -30,6 +31,7 @@ db.once("open", () => console.log("Connected to Mongoose")); // this is going to
 
 app.use("/", indexRouter);
 app.use("/authors", authorsRouter); // this will automatically append /authors before all the routes from the author
+app.use("/books", booksRouter);
 
 app.listen(process.env.PORT || 3000); // this is going to pull the port from the enviornment variable, the server is going to tell what source it is listening to but for the development purposes we assign a port number by ourselves since the server is not telling anything, so we set the port to 3000
 // yTCAF334bng8wnHq;
