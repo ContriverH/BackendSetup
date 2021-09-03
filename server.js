@@ -11,6 +11,7 @@ const indexRouter = require("./routes/index"); // this will tell the location of
 const authorsRouter = require("./routes/authors");
 const booksRouter = require("./routes/books");
 const bodyParser = require("body-parser");
+const methodOverride = require("method-override");
 
 // configuring our express application
 app.set("view engine", "ejs"); // we want to set the view engine as ejs
@@ -20,6 +21,7 @@ app.set("layout", "layouts/layout"); // we can tell how our layout files are goi
 app.use(expressLayouts); // tell node that we want to use the expressLayouts
 app.use(express.static("public")); // this will tell where our public files are going to be like, stylesheets, js files, images
 app.use(bodyParser.urlencoded({ limit: "10mb", extended: false })); //here urlencoded() is used because we are sending these values via url to our server. limit is to set the maximum size of the file that our server can accept.
+app.use(methodOverride("_method"));
 
 const mongoose = require("mongoose");
 

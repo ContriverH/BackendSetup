@@ -1,0 +1,6 @@
+<!-- so here instead of using an anchor tag we will be using a form to delete, because we don't want the browsers to click on it and then automatically delete the data -->
+
+<form action="<%= url %>?_method=DELETE" method="POST">
+    <!-- Using _method from the method override library we are changing the POST method to the DELETE method. -->
+    <button type="submit">Delete</button>
+</form>

@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Author = require("../models/author");
+const Book = require("../models/book");
 
 // All authors route
 // since in the server.js using the command-> use("./authors"),  so we can directly start writing from / while specifing the route
@@ -33,8 +34,7 @@ router.post("/", async (req, res) => {
 
   try {
     const newAuthor = await author.save();
-    // res.redirect(`authors /${newAuthor.id}`); we will use it when we create the newAuthor page
-    res.redirect(`authors`);
+    res.redirect(`authors/${newAuthor.id}`);
   } catch {
     res.render("authors/new", {
       author: author, // in case if the user has entered the name of the author, so he does not have to enter it again.
@@ -52,6 +52,62 @@ router.post("/", async (req, res) => {
   //     res.redirect(`authors`);
   //   }
   // });
+});
+
+router.get("/:id", async (req, res) => {
+  try {
+    const author = await Author.findById(req.params.id);
+    const books = await Book.find({ author: author.id }).limit(6).exec();
+    res.render("authors/show", {
+      author: author,
+      booksByAuthor: books,
+    });
+  } catch {
+    res.redirect("/");
+  }
+});
+
+router.get("/:id/edit", async (req, res) => {
+  try {
+    const author = await Author.findById(req.params.id); // findById() is a method provided by the mongoose library
+    res.render("authors/edit", { author: author });
+  } catch {
+    res.render("/authors");
+  }
+});
+
+router.put("/:id", async (req, res) => {
+  let author;
+  try {
+    author = await Author.findById(req.params.id);
+    author.name = req.body.name;
+    await author.save();
+    res.redirect(`/authors/${author.id}`);
+  } catch {
+    if (author == null) {
+      res.redirect("/");
+    } else {
+      res.render("authors/edit", {
+        author: author,
+        errorMessage: "Error updating Author",
+      });
+    }
+  }
+});
+
+router.delete("/:id", async (req, res) => {
+  let author;
+  try {
+    author = await Author.findById(req.params.id);
+    await author.remove(); // this remove() method is provided by mongoose
+    res.redirect("/authors");
+  } catch {
+    if (author == null) {
+      res.redirect("/");
+    } else {
+      res.redirect(`/authors/${author.id}`);
+    }
+  }
 });
 
 module.exports = router;
