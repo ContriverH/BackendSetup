@@ -22,6 +22,7 @@ router.get("/", async (req, res) => {
 });
 
 // new authors route
+// the get("/new", ) should be written before get("/:id"), otherwise new will be considered as an id by the js
 router.get("/new", (req, res) => {
   res.render("authors/new", { author: new Author() }); // here the author model is passed to the new page and then we can manipulte it from there.
 });
