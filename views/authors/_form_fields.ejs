@@ -1,6 +1,10 @@
 <!-- So, that we know that this is the "Partial file" and not the actual file that is being rendered from the server. -->
 <!-- The major advantage of creating such files is that you can use it at multiple places, if you want. -->
 
-<label>Name</label>
-<input type="text" name="name" value="<%=author.name %>">
-<!-- The name attribute here will be used as reference for fetching data from the form -->
+<div class="form-row">
+    <div class="form-item">
+        <label>Name</label>
+        <input type="text" name="name" value="<%=author.name %>">
+        <!-- The name attribute here will be used as reference for fetching data from the form -->
+    </div>
+</div>
