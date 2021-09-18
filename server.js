@@ -11,7 +11,7 @@ const indexRouter = require("./routes/index"); // this will tell the location of
 const authorsRouter = require("./routes/authors");
 const booksRouter = require("./routes/books");
 const bodyParser = require("body-parser");
-const methodOverride = require("method-override");
+const methodOverride = require("method-override"); // to handle put and delete request
 
 // configuring our express application
 app.set("view engine", "ejs"); // we want to set the view engine as ejs

@@ -19,15 +19,20 @@
         <script defer src="/javascripts/fileUpload.js"></script>
         <!-- Adding defer tag in the link of the HTML will allow that link to be executed when the entire body of the page is loaded. -->
 
+        <link rel="stylesheet" href="/stylesheets/main.css">
         <title>BackendSetup</title>
     </head>
 
     <body>
-        <%- include('../partials/header.ejs') %>
-            <%- include('../partials/errorMessage.ejs') %>
-                <%- body %>
-                    <!-- Here we want to put everything inside the body of every single page of our application -->
-                    <!-- It will include the before and after in every single page and those files need to only write the body  part of the repository  -->
+        <div class="container">
+            <%- include('../partials/header.ejs') %>
+                <div class="inner-container">
+                    <%- include('../partials/errorMessage.ejs') %>
+                        <%- body %>
+                            <!-- Here we want to put everything inside the body of every single page of our application -->
+                            <!-- It will include the before and after in every single page and those files need to only write the body  part of the repository  -->
+                </div>
+        </div>
     </body>
 
 </html>
