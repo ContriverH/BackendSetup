@@ -1,0 +1,65 @@
+:root {
+  --book-cover-width: 200px;
+  --book-cover-width-large: 325px;
+  --book-cover-aspect-ratio: 0.65; /* difference between height and width. Here it is 75% */
+}
+
+.book-cover {
+  width: var(--book-cover-width);
+  height: calc(var(--book-cover-width) / var(--book-cover-aspect-ratio));
+}
+
+.book-cover-large {
+  --book-cover-width: var(
+    --book-cover-width-large
+  ); /* redefining the book-cover-width variable */
+}
+
+.book-grid {
+  display: grid;
+  justify-content: center;
+  grid-gap: 2rem; /* this is to put gap between the elements */
+  grid-template-columns: repeat(
+    auto-fill,
+    var(book-cover-width)
+  ); /* we want to define how we want our columns to layout. autofill means it is going to fill as much space as possible in a row, before it wraps to next line. And then we have defined that width of each item in our array will be of the width of the book-cover */
+}
+
+.book-grid-large {
+  grid-template-columns: repeat(auto-fill, var(--book-cover-width-large));
+}
+
+.book-details {
+  display: flex; /* this is going to align everything on the right and left */
+}
+
+.book-details-label {
+  font-size: 1.2rem;
+  font-weight: 500;
+  align-self: flex-start; /* we want these eleemts to align at the begining of the grid */
+}
+
+.book-details-grid {
+  display: grid;
+  align-content: flex-start; /* align everything at the top of the grid */
+  align-items: center;
+  grid-gap: 1rem;
+  grid-template-columns: auto auto; /* auto lets to automatically define the size of the column based on the content in them */
+}
+
+.book-details-btn-grid {
+  display: grid;
+  justify-content: flex-start;
+  align-items: flex-start; /* to keep the elemets at the very top-left corner inside of our container */
+  align-content: flex-start; /* this means that our buttons will be pushed against this book cover as high as possible */
+  grid-template-areas: /* we can define everything by the name */
+    "edit delete"
+    "author author"; /* here twice the author is used, because we want our author button to be twice in size */
+  grid-gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.book-details-author-button {
+  grid-area: author; /* this way we can tell that we want to use the grid area by the name of the author */
+  justify-self: stretch; /* this is going to make the button to stretch to make it to the full width of other two buttons */
+}
